@@ -27,6 +27,12 @@ def getPiGroups(
     numberOfDimensions: Annotated[
         int, typer.Argument(help="Number of Dimensions used ")
     ] = 3,
+    repeatingParams: Annotated[
+        str,
+        typer.Argument(
+            help="indicies (comma separated) of the columns of paramNames which you would like to use as your set of repeatingParams"
+        ),
+    ] = "-1",
 ):
 
     paramNamesArr = np.array(paramNames.split(","))
@@ -50,7 +56,8 @@ def getPiGroups(
         print("ERROR: Must include Dimensions for all parameters")
     r = np.linalg.matrix_rank(dimMat)
 
-    if repeatingParams == [-1]:
+    if repeatingParams == "-1":
+        print("In default Path")
         possibleRepParams = utils.rSubset(
             [x for x in range(paramNamesArr.size) if x != solnVarCol], r
         )
@@ -64,12 +71,29 @@ def getPiGroups(
         for i in range(len(validRepParams)):
             print(f"{i}: {','.join(paramNamesArr[x] for x in validRepParams[i])}")
         RepParamsChoice = int(input("Choice: "))
+
         repeatingParams = np.array(validRepParams[RepParamsChoice])
-    print(f"repeatingParams: {paramNamesArr[repeatingParams]}")
+        print(f"repeatingParams: {paramNamesArr[repeatingParams]}")
+    else:
+        repeatingParams = np.fromstring(repeatingParams, dtype=int, sep=" ")
+        print(f"repeatingParams: {repeatingParams}")
+        if len(repeatingParams) != r:
+            # TODO what if we allowed someone to name two of the repeatingParams and then provided the results for the remaining options!
+            print("ERROR: Not Enough Dimensional Variables Set")
+            return
+        if np.linalg.det(dimMat[:, repeatingParams]) == 0:
+            print(f"Det: {np.linalg.det(dimMat[:, repeatingParams])} ")
+            print(
+                "ERROR: Selected set of repeating parameters is does not fufill the requirement (Determinant is zero!!!)"
+            )
+            return
 
+    print(
+        f"Det: {np.linalg.det(dimMat[:, repeatingParams])}\n Rank: {np.linalg.matrix_rank(dimMat[:, repeatingParams])}"
+    )
     repeatingParamsDimMat = dimMat[:, repeatingParams]
+    print(f"repeatingParamsIdx: {repeatingParams}")
     varsToAdd = [x for x in range(paramNamesArr.size) if x not in repeatingParams]
-
     output_dict = {}
     i = 0
     for n in varsToAdd:
