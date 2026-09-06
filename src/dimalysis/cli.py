@@ -2,17 +2,31 @@ import numpy as np
 import typer
 import pprint
 from dimalysis import utils
+from typing import Annotated
 
 app = typer.Typer()
 
 
 @app.command()
 def getPiGroups(
-    paramNames: str,
-    dimMatrix: str,
-    solutionVariable: str,
-    repeatingParams: list[int] = [-1],
-    numberOfDimensions: int = 3,
+    paramNames: Annotated[
+        str, typer.Argument(help="list of the parameters in analysis (comma separated)")
+    ],
+    dimMatrix: Annotated[
+        str,
+        typer.Argument(
+            help="Dimensional matrix for all parameters in same order as paramNames plugin "
+        ),
+    ],
+    solutionVariable: Annotated[
+        str,
+        typer.Argument(
+            help="The variable in which we are doing the dimensional analysis for"
+        ),
+    ],
+    numberOfDimensions: Annotated[
+        int, typer.Argument(help="Number of Dimensions used ")
+    ] = 3,
 ):
 
     paramNamesArr = np.array(paramNames.split(","))
@@ -22,6 +36,7 @@ def getPiGroups(
         .transpose()
     )
     # order ot dims is M L T
+    print("Dimensional Matrix: (Rows in order M L T) ")
     print(dimMat)
     if solutionVariable not in paramNamesArr:
         print(
