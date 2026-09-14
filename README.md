@@ -4,8 +4,10 @@
 - [Installing](#installing)
 - [Help](#help)
 - [Example](#example)
-  - [1. Our Solution variable and its dimension](#1-our-solution-variable-and-its-dimension)
-  - [2. The parameters our solution variable depends on and their dimensions](#2-the-parameters-our-solution-variable-depends-on-and-their-dimensions)
+  - [First, we must define a few things](#first-we-must-define-a-few-things)
+    - [1. Our Solution variable and its dimension](#1-our-solution-variable-and-its-dimension)
+    - [2. The parameters our solution variable depends on and their dimensions](#2-the-parameters-our-solution-variable-depends-on-and-their-dimensions)
+  - [Second, we build out dimensional matrix](#second-we-build-out-dimensional-matrix)
 
 <!--toc:end-->
 
@@ -53,17 +55,6 @@ for DimAlysis, this matrix should be input in column major order (dimension orde
 
 Our dimensional matrix becomes:
 
-$$ [
-\begin{array}{c|cccc}
- & P & l & w & g \\
-\hline
-M & 0 & 0 & 1 & 0 \\
-L & 0 & 1 & 1 & 1 \\
-T & 1 & 0 & -2 & -2 \\
-\end{array}
-\]
-$$
-
 ```
     P  l  w  g
 M [ 0  0  1  0]
@@ -105,5 +96,5 @@ In this case our only non-dimensional group (AKA, $\Pi$ group) is $\Pi_0 = Pl^{-
 
 We know that this is the expected number of $\Pi$-groups from the Buckingham $\Pi$ Theorem, which says that for a $n$-variable problem which spans over $r$ dimensions, we can formulate an equation relating all of the variables with $(n-r)$ non-dimensional $\Pi$ groups. Our output is consistent with this since $4-3 =1$.
 
-With this information, we can draw the conclusion that $P = \Psi( \sqrt{\frac{l},{g}})$ where $\Psi$ is some function.
+With this information, we can draw the conclusion that $P = \Psi( \sqrt{\frac{l}{g}})$ where $\Psi$ is some function.
 This corresponds with reality (check any physics textbook to compare the result!)
