@@ -4,10 +4,12 @@
 - [Installing](#installing)
 - [Help](#help)
 - [Example](#example)
-  - [First, we must define a few things](#first-we-must-define-a-few-things)
+  - [Defining a few things](#defining-a-few-things)
     - [1. Our Solution variable and its dimension](#1-our-solution-variable-and-its-dimension)
     - [2. The parameters our solution variable depends on and their dimensions](#2-the-parameters-our-solution-variable-depends-on-and-their-dimensions)
-  - [Second, we build out dimensional matrix](#second-we-build-out-dimensional-matrix)
+  - [Constructing our dimensional matrix](#constructing-our-dimensional-matrix)
+  - [Running DimAlysis](#running-dimalysis)
+  - [Analyzing the output](#analyzing-the-output)
 
 <!--toc:end-->
 
@@ -34,7 +36,7 @@ Lets derive the formula for the period of a simple pendulum using DimAlysis!
 > [!NOTE] Note on dimension
 > Dimensional analysis uses the concept of SI dimensions Mass ($M$), Length ($L$), Time ($T$), and sometimes Temperature ($\Theta$). These quantities are also known as Extensive properties! The parameters used in dimensional analysis should be able to be expressed in terms of Extensive properties.
 
-## First, we must define a few things
+## Defining a few things
 
 ### 1. Our Solution variable and its dimension
 
@@ -48,7 +50,7 @@ In this case $P$ depends on
 - Weight of the mass on the end of the pendulum arm (has dimension [$MLT^-2$])
 - Force of gravity $g$ (has dimension [$LT^-2$])
 
-## Second, we build out dimensional matrix
+## Constructing our dimensional matrix
 
 Now that we have defined these things, we can construct the dimensional matrix
 for DimAlysis, this matrix should be input in column major order (dimension order $M,L,T$), with spaces separating each number:
@@ -62,7 +64,7 @@ L [ 0  1  1  1]
 T [ 1  0 -2 -2]
 ```
 
-## Third, we run DimAlysis
+## Running DimAlysis
 
 Now, we input this matrix into DimAlysis in the proper format, and also specify out solution variable with the following command:
 
@@ -88,7 +90,7 @@ After entering 0 to choose our repeating parameters, we get the output
 {'Group 0:': (' P * l^-0.5*w^-0.0*g^0.5',)}
 ```
 
-## Fourth: Analyzing the output
+## Analyzing the output
 
 The output of Dimalysis gives us each dimensional group as a function of one of our non-repeating parameters with exponent $1$, and out repeaeting parameters, each with an exponent
 
