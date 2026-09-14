@@ -15,7 +15,7 @@ def getPiGroups(
     dimMatrix: Annotated[
         str,
         typer.Argument(
-            help="Dimensional matrix for all parameters in same order as paramNames plugin "
+            help="Dimensional matrix for all parameters in same order as paramNames plugin (column Major order, order of rows is M L T) "
         ),
     ],
     solutionVariable: Annotated[
@@ -57,14 +57,12 @@ def getPiGroups(
     r = np.linalg.matrix_rank(dimMat)
 
     if repeatingParams == "-1":
-        print("In default Path")
         possibleRepParams = utils.rSubset(
             [x for x in range(paramNamesArr.size) if x != solnVarCol], r
         )
         validRepParams = list(
             filter(lambda x: np.linalg.det(dimMat[:, x]) != 0, possibleRepParams)
         )
-        print(validRepParams)
         print(
             "Choose from the following sets of variables to be the repeating parameters:"
         )
