@@ -104,4 +104,4 @@ This corresponds with reality (check any physics textbook to compare the result!
 
 # Note on Dimalysis' effectiveness
 
-This method of dimensional analysis might not be the most fruitful method sometimes! While the solutions outputted should be correct formulations of pi-groups (please tell me if you find an incorrect solution while using this!!!), they might not be the most productive. A lot of times you can create pi-groups which correspond to common non-dimensional parameters such as Reynolds number, Stokes number, etc. (I wonder how they found those numbers? ;) ).
+This method of dimensional analysis might not be the most fruitful method sometimes! While the solutions outputted should be correct formulations of pi-groups (please tell me if you find an incorrect solution while using this!!!), they might not be the most productive. A lot of times you can create pi-groups which correspond to common non-dimensional parameters such as Reynolds number, Stokes number, etc. That will make your final formulation much more useful in practice. (I wonder how they found those numbers? ;) ).
